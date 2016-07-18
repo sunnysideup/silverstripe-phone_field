@@ -1,4 +1,4 @@
-# Contributing
+# Contributing to +++module_name_goes_here+++
 
 See a [high level overview](http://silverstripe.org/contributing-to-silverstripe) on silverstripe.org for some general information.
 

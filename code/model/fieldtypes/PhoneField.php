@@ -1,5 +1,19 @@
 <?php
-
+/**
+ * you can now use the following in your silverstripe templates
+ * $MyPhoneField.TellLink
+ * which then removes the first 0
+ * adds country code at the end
+ * and adds + and country code
+ *
+ * e.g
+ * 09 5556789
+ * becomes
+ * tel:+649555789
+ *
+ * if you would like a different country code then use:
+ * $MyPhoneField.TellLink(55)
+ */
 
 class PhoneField extends Varchar {
 
@@ -14,7 +28,7 @@ class PhoneField extends Varchar {
     /**
      * This method is accessed by other pages!
      *
-     * @param countryCode $countryCode (e.g. 64)
+     * @param int $countryCode (e.g. 64)
      *
      * @return string
      */

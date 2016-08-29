@@ -2,21 +2,23 @@
     "name": "sunnysideup/phone_field",
     "type": "silverstripe-module",
     "description": "Silverstripe Module that adds a phone field to your database field options, such as Varchar and HTMLText",
-    "keywords": ["Phone", "DB Field", "Varchar"],
+    "keywords": [
+        "Phone",
+        "DB Field",
+        "Varchar"
+    ],
     "license": "Sunny Side Up (BSD-3-Clause and CUSTOM)",
-    "authors":[
+    "authors": [
         {
             "name": "Nicolaas Francken",
-            "homepage": "https://github.com/sunnysideup",
-            "email" : "modules@sunnysideup.co.nz",
-            "role" : "lead developer"
+            "email": "modules@sunnysideup.co.nz",
+            "role": "lead developer"
         }
     ],
-    "require":{
+    "require": {
         "silverstripe/framework": "^3.4"
     },
     "extra": {
         "installer-name": "phone_field"
     }
-
 }

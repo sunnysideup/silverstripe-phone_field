@@ -60,7 +60,6 @@ class PhoneField extends Varchar {
 
 
     /**
-     * This method is accessed by other pages!
      *
      * @param countryCode $countryCode (e.g. 64)
      *

@@ -67,7 +67,7 @@ class PhoneField extends Varchar {
      */
     public function CallToLink($countryCode = "")
     {
-        return str_replace('tel:', 'callto:', $this->TellLink());
+        return str_replace('tel:', 'callto:', $this->TellLink($countryCode));
     }
 
 

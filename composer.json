@@ -3,6 +3,9 @@
     "type": "silverstripe-module",
     "description": "Silverstripe Module that adds a phone field to your database field options, such as Varchar and HTMLText",
     "keywords": [
+        "Silverstripe-CMS",
+        "CMS",
+        "Silverstripe",
         "Phone",
         "DB Field",
         "Varchar"
@@ -16,7 +19,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^3.4"
+        "silverstripe/framework": "~3.1",
+        "silverstripe/cms": "~3.1"
     },
     "extra": {
         "installer-name": "phone_field"

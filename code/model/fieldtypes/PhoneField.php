@@ -15,9 +15,8 @@
  * $MyPhoneField.TellLink(55)
  */
 
-class PhoneField extends Varchar {
-
-
+class PhoneField extends Varchar
+{
     private static $default_country_code = "64";
 
     private static $casting = array(
@@ -35,7 +34,7 @@ class PhoneField extends Varchar {
     public function TellLink($countryCode = "")
     {
         //remove non digits
-        if(!$countryCode) {
+        if (!$countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
         $phoneNumber = preg_replace('/\D/', '', $this->value);
@@ -69,8 +68,4 @@ class PhoneField extends Varchar {
     {
         return str_replace('tel:', 'callto:', $this->TellLink($countryCode));
     }
-
-
-
-
 }

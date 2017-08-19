@@ -68,4 +68,22 @@ class PhoneField extends Varchar
     {
         return str_replace('tel:', 'callto:', $this->TellLink($countryCode));
     }
+    
+    /**
+     * @see DBField::scaffoldFormField()
+     *
+     * @param string $title (optional)
+     * @param array $params (optional)
+     *
+     * @return PhoneNumberField | NullableField
+     */
+    public function scaffoldFormField($title = null, $params = null)
+    {
+        if (!$this->nullifyEmpty) {
+            return NullableField::create(PhoneNumberField::create($this->name, $title));
+        } else {
+            return PhoneNumberField::create($this->name, $title);
+        }
+    }
+    
 }

@@ -39,8 +39,8 @@ class PhoneField extends Varchar
         }
         //remove non-digits
         $phoneNumber = preg_replace('/\D/', '', $this->value);
-        //remove country code with plus
-        $phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
+        //remove country code with plus - NOT NECESSARY
+        //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
         //remove country code
         $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
         //remove leading zero

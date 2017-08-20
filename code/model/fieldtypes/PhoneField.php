@@ -75,9 +75,9 @@ class PhoneField extends Varchar
     public function scaffoldFormField($title = null, $params = null)
     {
         if (!$this->nullifyEmpty) {
-            return NullableField::create(PhoneNumberField::create($this->name, $title));
+            return NullableField::create(TextField::create($this->name, $title));
         } else {
-            return PhoneNumberField::create($this->name, $title);
+            return TextField::create($this->name, $title);
         }
     }
     

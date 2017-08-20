@@ -37,22 +37,17 @@ class PhoneField extends Varchar
         if (!$countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
+        //remove non-digits
         $phoneNumber = preg_replace('/\D/', '', $this->value);
-
-        //hack the 1300 scenario
-        //if (substr($phoneNumber, 0, 4) == '1300') {
-        //    $phoneNumber = preg_replace('/^1300/', '+611300', $phoneNumber);
-        //} else {
-            //remove leading zero
-            $phoneNumber = preg_replace('/^0/', '+'.$countryCode, $phoneNumber);
-        //}
-        //remove double-ups
-        $phoneNumber = str_replace(
-            '+'.$countryCode.''.$countryCode,
-            '+'.$countryCode,
-            $phoneNumber
-        );
-        $phoneNumber = "tel:+".$phoneNumber;
+        //remove country code with plus
+        $phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
+        //remove country code
+        $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
+        //remove leading zero
+        $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
+        //combine
+        $phoneNumber = 'tel:+'.$countryCode.$phoneNumber;
+        
         return $phoneNumber;
     }
 
@@ -84,6 +79,14 @@ class PhoneField extends Varchar
         } else {
             return PhoneNumberField::create($this->name, $title);
         }
+    }
+    
+    protected function literalLeftTrim($str, $prefix)
+    {
+        if (substr($str, 0, strlen($prefix)) == $prefix) {
+            $str = substr($str, strlen($prefix));
+        }     
+        return $str;
     }
     
 }

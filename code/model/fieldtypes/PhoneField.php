@@ -81,6 +81,13 @@ class PhoneField extends Varchar
         }
     }
     
+    /**
+     * removes a string at the start of a string, if present...
+     * @param string $str - the haystack
+     * @param string $prefix - the needle
+     *
+     * @return string
+     */
     protected function literalLeftTrim($str, $prefix)
     {
         if (substr($str, 0, strlen($prefix)) == $prefix) {

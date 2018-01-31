@@ -92,8 +92,7 @@ class PhoneField extends Varchar
     {
         if (substr($str, 0, strlen($prefix)) == $prefix) {
             $str = substr($str, strlen($prefix));
-        }     
+        }
         return $str;
     }
-    
 }

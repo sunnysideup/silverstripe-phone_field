@@ -24,6 +24,7 @@ class PhoneField extends Varchar
         "CallToLink" => "Varchar"
     );
 
+
     /**
      * This method is accessed by other pages!
      *
@@ -31,7 +32,7 @@ class PhoneField extends Varchar
      *
      * @return string
      */
-    public function TellLink($countryCode = "")
+    public function IntlFormat($countryCode = "")
     {
         //remove non digits
         if (!$countryCode) {
@@ -45,10 +46,20 @@ class PhoneField extends Varchar
         $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
         //remove leading zero
         $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
-        //combine
-        $phoneNumber = 'tel:+'.$countryCode.$phoneNumber;
-        
-        return $phoneNumber;
+
+        return '+'.$countryCode.$phoneNumber;
+    }
+
+    /**
+     * This method is accessed by other pages!
+     *
+     * @param int $countryCode (e.g. 64)
+     *
+     * @return string
+     */
+    public function TellLink($countryCode = "")
+    {
+        return 'tel:'.$this->IntlFormat($countryCode);
     }
 
 
@@ -61,9 +72,9 @@ class PhoneField extends Varchar
      */
     public function CallToLink($countryCode = "")
     {
-        return str_replace('tel:', 'callto:', $this->TellLink($countryCode));
+        return 'callto:'.$this->IntlFormat($countryCode);
     }
-    
+
     /**
      * @see DBField::scaffoldFormField()
      *
@@ -80,7 +91,7 @@ class PhoneField extends Varchar
             return TextField::create($this->name, $title);
         }
     }
-    
+
     /**
      * removes a string at the start of a string, if present...
      * @param string $str - the haystack

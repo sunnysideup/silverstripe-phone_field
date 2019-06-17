@@ -47,3 +47,13 @@ Array
     [1] => [2019-06-18 11:05:20] Applying ApiChangeWarningsRule to PhoneFieldTest.php...
     [2] => PHP Fatal error:  Class 'Varchar' not found in /var/www/upgrades/upgradeto4/phone_field/src/Model/Fieldtypes/PhoneField.php on line 28
 )
+
+# running php upgrade inspect see: https://github.com/silverstripe/silverstripe-upgrader
+cd /var/www/upgrades/upgradeto4
+php /var/www/upgrader/vendor/silverstripe/upgrader/bin/upgrade-code inspect /var/www/upgrades/upgradeto4/phone_field  --root-dir=/var/www/upgrades/upgradeto4 --write -vvv
+Array
+(
+    [0] => Running post-upgrade on "/var/www/upgrades/upgradeto4/phone_field"
+    [1] => [2019-06-18 11:05:37] Applying ApiChangeWarningsRule to PhoneFieldTest.php...
+    [2] => PHP Fatal error:  Class 'Varchar' not found in /var/www/upgrades/upgradeto4/phone_field/src/Model/Fieldtypes/PhoneField.php on line 28
+)

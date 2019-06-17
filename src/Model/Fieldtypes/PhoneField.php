@@ -1,4 +1,11 @@
 <?php
+
+namespace Sunnysideup\PhoneField\Model\Fieldtypes;
+
+use Varchar;
+use NullableField;
+use TextField;
+
 /**
  * you can now use the following in your silverstripe templates
  * $MyPhoneField.TellLink

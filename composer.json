@@ -1,6 +1,6 @@
 {
     "name": "sunnysideup/phone_field",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "description": "Silverstripe Module that adds a phone field to your database field options, such as Varchar and HTMLText",
     "keywords": [
         "Silverstripe-CMS",

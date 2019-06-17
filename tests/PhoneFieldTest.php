@@ -6,7 +6,7 @@ class PhoneFieldTest extends SapphireTest
 {
     protected $usesDatabase = false;
 
-    protected $requiredExtensions = [];
+    protected $required_extensions = [];
 
     public function TestDevBuild()
     {

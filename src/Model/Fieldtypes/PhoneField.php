@@ -1,4 +1,11 @@
 <?php
+
+namespace Sunnysideup\PhoneField\Model\Fieldtypes;
+
+use SilverStripe\ORM\FieldType\DBVarchar;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NullableField;
+
 /**
  * you can now use the following in your silverstripe templates
  * $MyPhoneField.TellLink
@@ -15,7 +22,7 @@
  * $MyPhoneField.TellLink(55)
  */
 
-class PhoneField extends Varchar
+class PhoneField extends DBVarchar
 {
     private static $default_country_code = "64";
 

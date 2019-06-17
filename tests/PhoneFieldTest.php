@@ -1,10 +1,12 @@
 <?php
 
+use SilverStripe\Dev\SapphireTest;
+
 class PhoneFieldTest extends SapphireTest
 {
     protected $usesDatabase = false;
 
-    protected $requiredExtensions = array();
+    protected $required_extensions = [];
 
     public function TestDevBuild()
     {

@@ -17,7 +17,7 @@ There is also a callto link which is the preferred method for skype.
     }
 ```
 
-in your `mysite/_config/config.yml` you can add:
+in your `app/_config/config.yml` you can add:
 
 ```yml
 PhoneField:

@@ -3,8 +3,11 @@
 namespace Sunnysideup\PhoneField\Model\Fieldtypes;
 
 use Varchar;
-use NullableField;
-use TextField;
+
+
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NullableField;
+
 
 /**
  * you can now use the following in your silverstripe templates

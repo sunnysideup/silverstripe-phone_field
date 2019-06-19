@@ -1,0 +1,3 @@
+SilverStripe\Core\Injector\Injector:
+  PhoneField:
+    class: Sunnysideup\PhoneField\Model\Fieldtypes\PhoneField

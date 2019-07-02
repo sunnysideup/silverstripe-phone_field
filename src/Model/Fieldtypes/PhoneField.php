@@ -26,10 +26,10 @@ class PhoneField extends DBVarchar
 {
     private static $default_country_code = "64";
 
-    private static $casting = array(
+    private static $casting = [
         "TellLink" => "Varchar",
-        "CallToLink" => "Varchar"
-    );
+        "CallToLink" => "Varchar",
+    ];
 
 
     /**

@@ -83,23 +83,6 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     * @see DBField::scaffoldFormField()
-     *
-     * @param string $title (optional)
-     * @param array $params (optional)
-     *
-     * @return PhoneNumberField | NullableField
-     */
-    public function scaffoldFormField($title = null, $params = null)
-    {
-        if (!$this->nullifyEmpty) {
-            return NullableField::create(TextField::create($this->name, $title));
-        } else {
-            return TextField::create($this->name, $title);
-        }
-    }
-
-    /**
      * removes a string at the start of a string, if present...
      * @param string $str - the haystack
      * @param string $prefix - the needle

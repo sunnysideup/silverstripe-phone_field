@@ -39,10 +39,10 @@ class PhoneField extends DBVarchar
      *
      * @return DBVarchar
      */
-    public function IntlFormat($countryCode = "") : string
+    public function IntlFormat($countryCode = "") : DBVarchar
     {
         $phoneNumber = $this->getProperPhoneNumber($countryCode);
-        
+
         return self::create_field('Varchar', $phoneNumber);
     }
 
@@ -53,11 +53,11 @@ class PhoneField extends DBVarchar
      *
      * @return DBVarchar
      */
-    public function TellLink($countryCode = "") : string
+    public function TellLink($countryCode = "") : DBVarchar
     {
         $phoneNumber = 'tel:'.$this->getProperPhoneNumber($countryCode);
-        
-        return self::create_field('Varchar', $phoneNumber);        
+
+        return self::create_field('Varchar', $phoneNumber);
     }
 
 
@@ -68,11 +68,11 @@ class PhoneField extends DBVarchar
      *
      * @return string
      */
-    public function CallToLink($countryCode = "") : string
+    public function CallToLink($countryCode = "") : DBVarchar
     {
         $phoneNumber = 'callto:'.$this->getProperPhoneNumber($countryCode);
-        
-        return self::create_field('Varchar', $phoneNumber);             
+
+        return self::create_field('Varchar', $phoneNumber);
     }
 
     /**
@@ -95,7 +95,7 @@ class PhoneField extends DBVarchar
      * @param int|string|null $countryCode (e.g. 64)
      *
      * @return string
-     */    
+     */
     protected function  getProperPhoneNumber($countryCode = "") : string
     {
         //remove non digits
@@ -111,6 +111,6 @@ class PhoneField extends DBVarchar
         //remove leading zero
         $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
 
-        return '+'.$countryCode.$phoneNumber;        
+        return '+'.$countryCode.$phoneNumber;
     }
 }

@@ -3,8 +3,6 @@
 namespace Sunnysideup\PhoneField\Model\Fieldtypes;
 
 use SilverStripe\ORM\FieldType\DBVarchar;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\NullableField;
 
 /**
  * you can now use the following in your silverstripe templates
@@ -24,13 +22,12 @@ use SilverStripe\Forms\NullableField;
 
 class PhoneField extends DBVarchar
 {
-    private static $default_country_code = "64";
+    private static $default_country_code = '64';
 
     private static $casting = [
-        "TellLink" => "Varchar",
-        "CallToLink" => "Varchar",
+        'TellLink' => 'Varchar',
+        'CallToLink' => 'Varchar',
     ];
-
 
     /**
      * This method is accessed by other pages!
@@ -39,7 +36,7 @@ class PhoneField extends DBVarchar
      *
      * @return DBVarchar
      */
-    public function IntlFormat($countryCode = "") : DBVarchar
+    public function IntlFormat($countryCode = ''): DBVarchar
     {
         $phoneNumber = $this->getProperPhoneNumber($countryCode);
 
@@ -53,24 +50,21 @@ class PhoneField extends DBVarchar
      *
      * @return DBVarchar
      */
-    public function TellLink($countryCode = "") : DBVarchar
+    public function TellLink($countryCode = ''): DBVarchar
     {
-        $phoneNumber = 'tel:'.$this->getProperPhoneNumber($countryCode);
+        $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
         return self::create_field('Varchar', $phoneNumber);
     }
 
-
-
     /**
-     *
      * @param int|string|null $countryCode (e.g. 64)
      *
      * @return string
      */
-    public function CallToLink($countryCode = "") : DBVarchar
+    public function CallToLink($countryCode = ''): DBVarchar
     {
-        $phoneNumber = 'callto:'.$this->getProperPhoneNumber($countryCode);
+        $phoneNumber = 'callto:' . $this->getProperPhoneNumber($countryCode);
 
         return self::create_field('Varchar', $phoneNumber);
     }
@@ -82,7 +76,7 @@ class PhoneField extends DBVarchar
      *
      * @return string
      */
-    protected function literalLeftTrim(string $str, string $prefix) : string
+    protected function literalLeftTrim(string $str, string $prefix): string
     {
         if (substr($str, 0, strlen($prefix)) === $prefix) {
             $str = substr($str, strlen($prefix));
@@ -91,15 +85,14 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     *
      * @param int|string|null $countryCode (e.g. 64)
      *
      * @return string
      */
-    protected function  getProperPhoneNumber($countryCode = "") : string
+    protected function getProperPhoneNumber($countryCode = ''): string
     {
         //remove non digits
-        if (!$countryCode) {
+        if (! $countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
         //remove non-digits
@@ -111,6 +104,6 @@ class PhoneField extends DBVarchar
         //remove leading zero
         $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
 
-        return '+'.$countryCode.$phoneNumber;
+        return '+' . $countryCode . $phoneNumber;
     }
 }

@@ -54,19 +54,27 @@ class PhoneField extends DBVarchar
     {
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
-        return self::create_field('Varchar', $phoneNumber);
+        /** @var DBVarchar */
+        $var = self::create_field('Varchar', $phoneNumber);
+        $var->RAW();
+
+        return $var;
     }
 
     /**
      * @param int|string|null $countryCode (e.g. 64)
      *
-     * @return string
+     * @return DBVarchar
      */
     public function CallToLink($countryCode = ''): DBVarchar
     {
         $phoneNumber = 'callto:' . $this->getProperPhoneNumber($countryCode);
 
-        return self::create_field('Varchar', $phoneNumber);
+        /** @var DBVarchar */
+        $var = self::create_field('Varchar', $phoneNumber);
+        $var->RAW();
+
+        return $var;
     }
 
     /**

@@ -37,24 +37,13 @@ class PhoneField extends DBVarchar
      *
      * @param string|int|null $countryCode (e.g. 64)
      *
-     * @return string
+     * @return DBVarchar
      */
     public function IntlFormat($countryCode = "") : string
     {
-        //remove non digits
-        if (!$countryCode) {
-            $countryCode = $this->Config()->default_country_code;
-        }
-        //remove non-digits
-        $phoneNumber = preg_replace('/\D/', '', $this->value);
-        //remove country code with plus - NOT NECESSARY
-        //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
-        //remove country code
-        $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
-        //remove leading zero
-        $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
-
-        return '+'.$countryCode.$phoneNumber;
+        $phoneNumber = $this->getProperPhoneNumber($countryCode);
+        
+        return self::create_field('Varchar', $phoneNumber);
     }
 
     /**
@@ -62,11 +51,13 @@ class PhoneField extends DBVarchar
      *
      * @param string|int|null $countryCode (e.g. 64)
      *
-     * @return string
+     * @return DBVarchar
      */
     public function TellLink($countryCode = "") : string
     {
-        return 'tel:'.$this->IntlFormat($countryCode);
+        $phoneNumber = 'tel:'.$this->getProperPhoneNumber($countryCode);
+        
+        return self::create_field('Varchar', $phoneNumber);        
     }
 
 
@@ -79,7 +70,9 @@ class PhoneField extends DBVarchar
      */
     public function CallToLink($countryCode = "") : string
     {
-        return 'callto:'.$this->IntlFormat($countryCode);
+        $phoneNumber = 'callto:'.$this->getProperPhoneNumber($countryCode);
+        
+        return self::create_field('Varchar', $phoneNumber);             
     }
 
     /**
@@ -95,5 +88,29 @@ class PhoneField extends DBVarchar
             $str = substr($str, strlen($prefix));
         }
         return $str;
+    }
+
+    /**
+     *
+     * @param int|string|null $countryCode (e.g. 64)
+     *
+     * @return string
+     */    
+    protected function  getProperPhoneNumber($countryCode = "") : string
+    {
+        //remove non digits
+        if (!$countryCode) {
+            $countryCode = $this->Config()->default_country_code;
+        }
+        //remove non-digits
+        $phoneNumber = preg_replace('/\D/', '', $this->value);
+        //remove country code with plus - NOT NECESSARY
+        //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
+        //remove country code
+        $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
+        //remove leading zero
+        $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
+
+        return '+'.$countryCode.$phoneNumber;        
     }
 }

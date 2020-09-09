@@ -35,11 +35,11 @@ class PhoneField extends DBVarchar
     /**
      * This method is accessed by other pages!
      *
-     * @param int $countryCode (e.g. 64)
+     * @param string|int|null $countryCode (e.g. 64)
      *
      * @return string
      */
-    public function IntlFormat($countryCode = "")
+    public function IntlFormat($countryCode = "") : string
     {
         //remove non digits
         if (!$countryCode) {
@@ -60,11 +60,11 @@ class PhoneField extends DBVarchar
     /**
      * This method is accessed by other pages!
      *
-     * @param int $countryCode (e.g. 64)
+     * @param string|int|null $countryCode (e.g. 64)
      *
      * @return string
      */
-    public function TellLink($countryCode = "")
+    public function TellLink($countryCode = "") : string
     {
         return 'tel:'.$this->IntlFormat($countryCode);
     }
@@ -73,11 +73,11 @@ class PhoneField extends DBVarchar
 
     /**
      *
-     * @param countryCode $countryCode (e.g. 64)
+     * @param int|string|null $countryCode (e.g. 64)
      *
      * @return string
      */
-    public function CallToLink($countryCode = "")
+    public function CallToLink($countryCode = "") : string
     {
         return 'callto:'.$this->IntlFormat($countryCode);
     }
@@ -89,9 +89,9 @@ class PhoneField extends DBVarchar
      *
      * @return string
      */
-    protected function literalLeftTrim($str, $prefix)
+    protected function literalLeftTrim(string $str, string $prefix) : string
     {
-        if (substr($str, 0, strlen($prefix)) == $prefix) {
+        if (substr($str, 0, strlen($prefix)) === $prefix) {
             $str = substr($str, strlen($prefix));
         }
         return $str;

@@ -119,7 +119,6 @@ class PhoneField extends DBVarchar
             $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
         } else {
             $hasCountryCode = false;
-            $countryCode = '';
         }
 
         return ($hasCountryCode ? '+' . $countryCode : '') . $phoneNumber;

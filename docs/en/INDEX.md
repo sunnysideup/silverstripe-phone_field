@@ -20,7 +20,7 @@ There is also a callto link which is the preferred method for skype.
 in your `app/_config/config.yml` you can add:
 
 ```yml
-PhoneField:
+Sunnysideup\PhoneField\Model\Fieldtypes\PhoneField:
   default_country_code: 31
 ```
 
@@ -32,4 +32,6 @@ call us: <a href="$MyPhoneNumber.TellLink">$MyPhoneNumber</a><br />
 call us on skype: <a href="$MyPhoneNumber.CallLink">$MyPhoneNumber</a><br />
 
 calls us in Germany: <a href="$MyPhoneNumber.TellLink(49)">$MyPhoneNumber</a><br />
+
+calls us only from within your country: <a href="$MyPhoneNumber.TellLink(0)">$MyPhoneNumber</a><br />
 ```

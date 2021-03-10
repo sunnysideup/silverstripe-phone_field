@@ -32,11 +32,12 @@ class PhoneField extends DBVarchar
     /**
      * This method is accessed by other pages!
      *
-     * @param string|int|null $countryCode (e.g. 64)
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                                     set to zero to have no country code.
      *
      * @return DBVarchar
      */
-    public function IntlFormat($countryCode = ''): DBVarchar
+    public function IntlFormat(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = $this->getProperPhoneNumber($countryCode);
 
@@ -46,11 +47,12 @@ class PhoneField extends DBVarchar
     /**
      * This method is accessed by other pages!
      *
-     * @param string|int|null $countryCode (e.g. 64)
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                                     set to zero to have no country code.
      *
      * @return DBVarchar
      */
-    public function TellLink($countryCode = ''): DBVarchar
+    public function TellLink(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
@@ -62,11 +64,12 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     * @param int|string|null $countryCode (e.g. 64)
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                                     set to zero to have no country code.
      *
      * @return DBVarchar
      */
-    public function CallToLink($countryCode = ''): DBVarchar
+    public function CallToLink(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = 'callto:' . $this->getProperPhoneNumber($countryCode);
 
@@ -93,25 +96,32 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     * @param int|string|null $countryCode (e.g. 64)
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                                     set to zero to have no country code.
      *
      * @return string
      */
-    protected function getProperPhoneNumber($countryCode = ''): string
+    protected function getProperPhoneNumber(?int $countryCode = null): string
     {
-        //remove non digits
-        if (! $countryCode) {
-            $countryCode = $this->Config()->default_country_code;
-        }
         //remove non-digits
         $phoneNumber = preg_replace('/\D/', '', $this->value);
-        //remove country code with plus - NOT NECESSARY
-        //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
-        //remove country code
-        $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
-        //remove leading zero
-        $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
 
-        return '+' . $countryCode . $phoneNumber;
+        $hasCountryCode = true;
+        if ($countryCode === null) {
+            $countryCode = $this->Config()->default_country_code;
+        }
+        if ($countryCode) {
+            //remove country code with plus - NOT NECESSARY
+            //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
+            //remove country code
+            $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
+            //remove leading zero
+            $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
+        } else {
+            $hasCountryCode = false;
+            $countryCode = '';
+        }
+
+        return ($hasCountryCode ? '+' . $countryCode : '') . $phoneNumber;
     }
 }

@@ -34,8 +34,6 @@ class PhoneField extends DBVarchar
      *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                                     set to zero to have no country code.
-     *
-     * @return DBVarchar
      */
     public function IntlFormat(?int $countryCode = null): DBVarchar
     {
@@ -49,14 +47,12 @@ class PhoneField extends DBVarchar
      *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                                     set to zero to have no country code.
-     *
-     * @return DBVarchar
      */
     public function TellLink(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
-        /** @var DBVarchar */
+        /** @var DBVarchar $var */
         $var = self::create_field('Varchar', $phoneNumber);
         $var->RAW();
 
@@ -66,14 +62,12 @@ class PhoneField extends DBVarchar
     /**
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                                     set to zero to have no country code.
-     *
-     * @return DBVarchar
      */
     public function CallToLink(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = 'callto:' . $this->getProperPhoneNumber($countryCode);
 
-        /** @var DBVarchar */
+        /** @var DBVarchar $var */
         $var = self::create_field('Varchar', $phoneNumber);
         $var->RAW();
 
@@ -84,8 +78,6 @@ class PhoneField extends DBVarchar
      * removes a string at the start of a string, if present...
      * @param string $str - the haystack
      * @param string $prefix - the needle
-     *
-     * @return string
      */
     protected function literalLeftTrim(string $str, string $prefix): string
     {
@@ -98,8 +90,6 @@ class PhoneField extends DBVarchar
     /**
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                                     set to zero to have no country code.
-     *
-     * @return string
      */
     protected function getProperPhoneNumber(?int $countryCode = null): string
     {

@@ -94,7 +94,7 @@ class PhoneField extends DBVarchar
     protected function getProperPhoneNumber(?int $countryCode = null): string
     {
         //remove non-digits
-        $phoneNumber = preg_replace('/\D/', '', $this->value);
+        $phoneNumber = preg_replace('#\D#', '', $this->value);
 
         $hasCountryCode = true;
         if ($countryCode === null) {

@@ -2,6 +2,10 @@
 
 use SilverStripe\Dev\SapphireTest;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class PhoneFieldTest extends SapphireTest
 {
     protected $usesDatabase = false;

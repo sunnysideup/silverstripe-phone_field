@@ -9,7 +9,7 @@ use SilverStripe\ORM\FieldType\DBVarchar;
  * $MyPhoneField.TellLink
  * which then removes the first 0
  * adds country code at the end
- * and adds + and country code
+ * and adds + and country code.
  *
  * e.g
  * 09 5556789
@@ -19,7 +19,6 @@ use SilverStripe\ORM\FieldType\DBVarchar;
  * if you would like a different country code then use:
  * $MyPhoneField.TellLink(55)
  */
-
 class PhoneField extends DBVarchar
 {
     private static $default_country_code = '64';
@@ -33,7 +32,7 @@ class PhoneField extends DBVarchar
      * This method is accessed by other pages!
      *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
-     *                                     set to zero to have no country code.
+     *                         set to zero to have no country code.
      */
     public function IntlFormat(?int $countryCode = null): DBVarchar
     {
@@ -46,7 +45,7 @@ class PhoneField extends DBVarchar
      * This method is accessed by other pages!
      *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
-     *                                     set to zero to have no country code.
+     *                         set to zero to have no country code.
      */
     public function TellLink(?int $countryCode = null): DBVarchar
     {
@@ -61,7 +60,7 @@ class PhoneField extends DBVarchar
 
     /**
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
-     *                                     set to zero to have no country code.
+     *                         set to zero to have no country code.
      */
     public function CallToLink(?int $countryCode = null): DBVarchar
     {
@@ -76,7 +75,8 @@ class PhoneField extends DBVarchar
 
     /**
      * removes a string at the start of a string, if present...
-     * @param string $str - the haystack
+     *
+     * @param string $str    - the haystack
      * @param string $prefix - the needle
      */
     protected function literalLeftTrim(string $str, string $prefix): string
@@ -84,12 +84,13 @@ class PhoneField extends DBVarchar
         if (substr($str, 0, strlen($prefix)) === $prefix) {
             $str = substr($str, strlen($prefix));
         }
+
         return $str;
     }
 
     /**
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
-     *                                     set to zero to have no country code.
+     *                         set to zero to have no country code.
      */
     protected function getProperPhoneNumber(?int $countryCode = null): string
     {
@@ -97,7 +98,7 @@ class PhoneField extends DBVarchar
         $phoneNumber = preg_replace('#\D#', '', $this->value);
 
         $hasCountryCode = true;
-        if ($countryCode === null) {
+        if (null === $countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
         if ($countryCode) {

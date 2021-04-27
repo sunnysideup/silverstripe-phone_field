@@ -35,3 +35,7 @@ calls us in Germany: <a href="$MyPhoneNumber.TellLink(49)">$MyPhoneNumber</a><br
 
 calls us only from within your country: <a href="$MyPhoneNumber.TellLink(0)">$MyPhoneNumber</a><br />
 ```
+
+# Front End Support
+
+Consider using: https://github.com/sunnysideup/silverstripe-phone_field

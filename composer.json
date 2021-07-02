@@ -30,4 +30,5 @@
     "suggests":
     {
       "innoweb/silverstripe-international-phone-number-field": "front-end support for phone fields"
+    }
 }

@@ -29,7 +29,6 @@ class PhoneField extends DBVarchar
     ];
 
     /**
-     * This method is accessed by other pages!
      *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                         set to zero to have no country code.
@@ -42,8 +41,8 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     * This method is accessed by other pages!
-     *
+     * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
+     * this is the better of the two.
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                         set to zero to have no country code.
      */

@@ -6,7 +6,7 @@ use SilverStripe\ORM\FieldType\DBVarchar;
 
 /**
  * you can now use the following in your silverstripe templates
- * $MyPhoneField.TellLink
+ * $MyPhoneField.TelLink
  * which then removes the first 0
  * adds country code at the end
  * and adds + and country code.
@@ -17,15 +17,17 @@ use SilverStripe\ORM\FieldType\DBVarchar;
  * tel:+649555789
  *
  * if you would like a different country code then use:
- * $MyPhoneField.TellLink(55)
+ * $MyPhoneField.TelLink(55)
  */
 class PhoneField extends DBVarchar
 {
     private static $default_country_code = '64';
 
     private static $casting = [
-        'TellLink' => 'Varchar',
+        'IntlFormat' => 'Varchar',
         'CallToLink' => 'Varchar',
+        'TelLink' => 'Varchar',
+        'TellLink' => 'Varchar',
     ];
 
     /**
@@ -46,7 +48,7 @@ class PhoneField extends DBVarchar
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                         set to zero to have no country code.
      */
-    public function TellLink(?int $countryCode = null): DBVarchar
+    public function TelLink(?int $countryCode = null): DBVarchar
     {
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
@@ -55,6 +57,17 @@ class PhoneField extends DBVarchar
         $var->RAW();
 
         return $var;
+    }
+    /**
+     * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
+     * this is the better of the two.
+     *
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                         set to zero to have no country code.
+     */
+    public function TellLink(?int $countryCode = null): DBVarchar
+    {
+        return $this->TelLink($countryCode);
     }
 
     /**

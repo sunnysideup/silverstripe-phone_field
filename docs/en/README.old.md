@@ -27,9 +27,9 @@ PhoneField:
 in your template files you can now write:
 
 ```html
-call us: <a href="$MyPhoneNumber.TellLink">$MyPhoneNumber</a><br />
+call us: <a href="$MyPhoneNumber.TelLink">$MyPhoneNumber</a><br />
 
 call us on skype: <a href="$MyPhoneNumber.CallLink">$MyPhoneNumber</a><br />
 
-calls us in Germany: <a href="$MyPhoneNumber.TellLink(49)">$MyPhoneNumber</a><br />
+calls us in Germany: <a href="$MyPhoneNumber.TelLink(49)">$MyPhoneNumber</a><br />
 ```

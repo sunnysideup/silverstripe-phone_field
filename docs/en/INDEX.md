@@ -27,15 +27,21 @@ Sunnysideup\PhoneField\Model\Fieldtypes\PhoneField:
 in your template files you can now write:
 
 ```html
-call us: <a href="$MyPhoneNumber.TellLink">$MyPhoneNumber</a><br />
+call us: <a href="$MyPhoneNumber.TelLink">$MyPhoneNumber.IntlFormat</a>
+<br />
 
-call us on skype: <a href="$MyPhoneNumber.CallLink">$MyPhoneNumber</a><br />
+call us on skype: <a href="$MyPhoneNumber.CallToLink">$MyPhoneNumber</a>
+<br />
 
-calls us in Germany: <a href="$MyPhoneNumber.TellLink(49)">$MyPhoneNumber</a><br />
+calls us in Germany: <a href="$MyPhoneNumber.TelLink(49)">$MyPhoneNumber</a>
+<br />
 
-calls us only from within your country: <a href="$MyPhoneNumber.TellLink(0)">$MyPhoneNumber</a><br />
+calls us only from within your country: <a href="$MyPhoneNumber.TelLink(0)">$MyPhoneNumber</a>
+<br />
 ```
 
-# Front End Support
+Instead of `TelLink` you can also use `CallToLink`.  However, the `TelLink` is recommended.
 
-Consider using: https://github.com/sunnysideup/silverstripe-phone_field
+see: https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
+
+Also available

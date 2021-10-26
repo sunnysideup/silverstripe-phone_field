@@ -2,9 +2,8 @@
 
 namespace Sunnysideup\PhoneField\Model\Fieldtypes;
 
-use SilverStripe\ORM\FieldType\DBVarchar;
-
 use SilverStripe\Dev\Deprecation;
+use SilverStripe\ORM\FieldType\DBVarchar;
 
 /**
  * you can now use the following in your silverstripe templates
@@ -60,6 +59,7 @@ class PhoneField extends DBVarchar
 
         return $var;
     }
+
     /**
      * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
      * this is the better of the two.
@@ -70,6 +70,7 @@ class PhoneField extends DBVarchar
     public function TellLink(?int $countryCode = null): DBVarchar
     {
         Deprecation::notice('4.0', 'Use PhoneField::TelLink instead');
+
         return $this->TelLink($countryCode);
     }
 

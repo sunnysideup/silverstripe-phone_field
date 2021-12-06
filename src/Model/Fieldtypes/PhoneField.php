@@ -69,7 +69,7 @@ class PhoneField extends DBVarchar
      */
     public function TellLink(?int $countryCode = null): DBVarchar
     {
-        Deprecation::notice('4.0', 'Use PhoneField::TelLink instead');
+        Deprecation::notice('4.0', 'Use PhoneField::TelLink instead of PhoneField::TellLink - i.e. replace double "L" with a single "L" ... ');
 
         return $this->TelLink($countryCode);
     }

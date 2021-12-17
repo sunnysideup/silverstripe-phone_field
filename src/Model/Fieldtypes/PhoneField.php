@@ -28,6 +28,7 @@ class PhoneField extends DBVarchar
         'IntlFormat' => 'Varchar',
         'CallToLink' => 'Varchar',
         'TelLink' => 'Varchar',
+        'TelLinkWithZero' => 'Varchar',
         'TellLink' => 'Varchar',
     ];
 
@@ -42,6 +43,23 @@ class PhoneField extends DBVarchar
         return self::create_field('Varchar', $phoneNumber);
     }
 
+    /**
+     * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
+     * this is the better of the two.
+     *
+     * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
+     *                         set to zero to have no country code.
+     */
+    public function TelLinkWithZero(?int $countryCode = null): DBVarchar
+    {
+        $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode, true);
+
+        /** @var DBVarchar $var */
+        $var = self::create_field('Varchar', $phoneNumber);
+        $var->RAW();
+
+        return $var;
+    }
     /**
      * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
      * this is the better of the two.
@@ -108,7 +126,7 @@ class PhoneField extends DBVarchar
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                         set to zero to have no country code.
      */
-    protected function getProperPhoneNumber(?int $countryCode = null): string
+    protected function getProperPhoneNumber(?int $countryCode = null, ?bool $keepFirstZero = false): string
     {
         //remove non-digits
         $phoneNumber = preg_replace('#\D#', '', $this->value);
@@ -123,11 +141,15 @@ class PhoneField extends DBVarchar
             //remove country code
             $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
             //remove leading zero
-            $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
+            if ($this->keepZero === false) {
+                $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
+            }
         } else {
             $hasCountryCode = false;
         }
 
-        return ($hasCountryCode ? '+' . $countryCode : '') . $phoneNumber;
+        $countryCodeWithPlus = $hasCountryCode ? '+' . $countryCode : '';
+
+        return  $countryCodeWithPlus . $phoneNumber;
     }
 }

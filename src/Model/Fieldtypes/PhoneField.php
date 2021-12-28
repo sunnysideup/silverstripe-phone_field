@@ -60,6 +60,7 @@ class PhoneField extends DBVarchar
 
         return $var;
     }
+
     /**
      * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
      * this is the better of the two.
@@ -141,7 +142,7 @@ class PhoneField extends DBVarchar
             //remove country code
             $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
             //remove leading zero
-            if ($this->keepZero === false) {
+            if (false === $this->keepZero) {
                 $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
             }
         } else {

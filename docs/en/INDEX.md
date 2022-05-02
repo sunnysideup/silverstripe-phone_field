@@ -12,7 +12,9 @@ There is also a callto link which is the preferred method for skype.
 <?php
     class MyClass extends DataObject
     {
-        private static $db = array("MyPhoneNumber" => "PhoneField");
+        private static $db = [
+            'MyPhoneNumber' => 'PhoneField'
+        ];
 
     }
 ```

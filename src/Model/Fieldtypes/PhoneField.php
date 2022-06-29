@@ -136,6 +136,7 @@ class PhoneField extends DBVarchar
         if (null === $countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
+
         if ($countryCode) {
             //remove country code with plus - NOT NECESSARY
             //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);

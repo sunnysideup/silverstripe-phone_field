@@ -116,8 +116,8 @@ class PhoneField extends DBVarchar
      */
     protected function literalLeftTrim(string $str, string $prefix): string
     {
-        if (substr((string) $str, 0, strlen($prefix)) === $prefix) {
-            $str = substr((string) $str, strlen($prefix));
+        if (substr((string) $str, 0, strlen( (string) $prefix)) === $prefix) {
+            $str = substr((string) $str, strlen( (string) $prefix));
         }
 
         return $str;

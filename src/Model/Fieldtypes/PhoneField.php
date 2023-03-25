@@ -116,8 +116,8 @@ class PhoneField extends DBVarchar
      */
     protected function literalLeftTrim(string $str, string $prefix): string
     {
-        if (substr((string) $str, 0, strlen( (string) $prefix)) === $prefix) {
-            $str = substr((string) $str, strlen( (string) $prefix));
+        if (substr((string) $str, 0, strlen((string) $prefix)) === $prefix) {
+            $str = substr((string) $str, strlen((string) $prefix));
         }
 
         return $str;
@@ -129,10 +129,11 @@ class PhoneField extends DBVarchar
      */
     protected function getProperPhoneNumber(?int $countryCode = null, ?bool $keepFirstZero = false): string
     {
-        if (strpos((string) $this->value, '+') === 0 ) {
+        if (0 === strpos((string) $this->value, '+')) {
             //remove non-digits
             $phoneNumber = preg_replace('#\D#', '', (string) $this->value);
-            return '+'.$phoneNumber;    
+
+            return '+' . $phoneNumber;
         }
         //remove non-digits
         $phoneNumber = preg_replace('#\D#', '', (string) $this->value);

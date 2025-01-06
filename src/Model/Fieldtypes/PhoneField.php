@@ -25,12 +25,18 @@ class PhoneField extends DBVarchar
     private static $default_country_code = '64';
 
     private static $casting = [
+        'Link' => 'Varchar',
         'IntlFormat' => 'Varchar',
         'CallToLink' => 'Varchar',
         'TelLink' => 'Varchar',
         'TelLinkWithZero' => 'Varchar',
         'TellLink' => 'Varchar',
     ];
+
+    public function Link(): DBVarchar
+    {
+        return $this->TelLink();
+    }
 
     /**
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
@@ -44,9 +50,6 @@ class PhoneField extends DBVarchar
     }
 
     /**
-     * https://stackoverflow.com/questions/1164004/how-to-mark-up-phone-numbers
-     * this is the better of the two.
-     *
      * @param int $countryCode (e.g. 64) - leave blank to use default, or set a different country code,
      *                         set to zero to have no country code.
      */
@@ -56,7 +59,6 @@ class PhoneField extends DBVarchar
 
         /** @var DBVarchar $var */
         $var = self::create_field('Varchar', $phoneNumber);
-        $var->RAW();
 
         return $var;
     }
@@ -74,7 +76,6 @@ class PhoneField extends DBVarchar
 
         /** @var DBVarchar $var */
         $var = self::create_field('Varchar', $phoneNumber);
-        $var->RAW();
 
         return $var;
     }
@@ -103,7 +104,6 @@ class PhoneField extends DBVarchar
 
         /** @var DBVarchar $var */
         $var = self::create_field('Varchar', $phoneNumber);
-        $var->RAW();
 
         return $var;
     }

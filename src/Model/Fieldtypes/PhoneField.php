@@ -26,6 +26,7 @@ class PhoneField extends DBVarchar
 
     private static $casting = [
         'Link' => 'Varchar',
+        'Nice' => 'Varchar',
         'IntlFormat' => 'Varchar',
         'CallToLink' => 'Varchar',
         'TelLink' => 'Varchar',
@@ -33,9 +34,19 @@ class PhoneField extends DBVarchar
         'TellLink' => 'Varchar',
     ];
 
-    public function Link(): DBVarchar
+    /**
+     * how the user enters it is how they want it!
+     *
+     * @return string
+     */
+    public function Link(?int $countryCode = null): DBVarchar
     {
-        return $this->TelLink();
+        return $this->TellLink($countryCode);
+    }
+
+    public function Nice()
+    {
+        return self::create_field('Varchar', $this->value);
     }
 
     /**
@@ -129,35 +140,37 @@ class PhoneField extends DBVarchar
      */
     protected function getProperPhoneNumber(?int $countryCode = null, ?bool $keepFirstZero = false): string
     {
-        if (0 === strpos((string) $this->value, '+')) {
-            //remove non-digits
-            $phoneNumber = preg_replace('#\D#', '', (string) $this->value);
+        $v = $this->addCountryCode($countryCode, $keepFirstZero);
+        $v = preg_replace('#\D#', '', (string) $v);
+        return '+' . $v;
+    }
 
-            return '+' . $phoneNumber;
+    protected function addCountryCode(?int $countryCode = null, ?bool $keepFirstZero = false)
+    {
+        $v = $this->value;
+        if (0 === strpos((string) $v, '+')) {
+            return $v;
         }
-        //remove non-digits
-        $phoneNumber = preg_replace('#\D#', '', (string) $this->value);
-
-        $hasCountryCode = true;
         if (null === $countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
-
-        if ($countryCode) {
-            //remove country code with plus - NOT NECESSARY
-            //$phoneNumber = $this->literalLeftTrim($phoneNumber, '+'.$countryCode);
-            //remove country code
-            $phoneNumber = $this->literalLeftTrim($phoneNumber, $countryCode);
-            //remove leading zero
-            if (false === $this->keepZero) {
-                $phoneNumber = $this->literalLeftTrim($phoneNumber, '0');
-            }
-        } else {
-            $hasCountryCode = false;
+        if (0 === strpos((string) $v, '0')) {
+            $v = $this->literalLeftTrim($v, '0');
         }
+        if ($countryCode) {
+            $v = $this->literalLeftTrim($v, $countryCode);
+        }
+        return '+' . $countryCode . $v;
+    }
 
-        $countryCodeWithPlus = $hasCountryCode ? '+' . $countryCode : '';
-
-        return $countryCodeWithPlus . $phoneNumber;
+    protected function removeCountryCode(?int $countryCode = null,)
+    {
+        $v = $this->value;
+        if (null === $countryCode) {
+            $countryCode = $this->Config()->default_country_code;
+        }
+        $v = $this->literalLeftTrim($v, '+');
+        $v = $this->literalLeftTrim($v, $countryCode);
+        return $v;
     }
 }

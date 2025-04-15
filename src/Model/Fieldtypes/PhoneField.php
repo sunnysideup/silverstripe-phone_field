@@ -148,19 +148,22 @@ class PhoneField extends DBVarchar
     protected function addCountryCode(?int $countryCode = null, ?bool $keepFirstZero = false)
     {
         $v = $this->value;
-        if (0 === strpos((string) $v, '+')) {
-            return $v;
+        if ($v) {
+            if (0 === strpos((string) $v, '+')) {
+                return $v;
+            }
+            if (null === $countryCode) {
+                $countryCode = $this->Config()->default_country_code;
+            }
+            if (0 === strpos((string) $v, '0')) {
+                $v = $this->literalLeftTrim($v, '0');
+            }
+            if ($countryCode) {
+                $v = $this->literalLeftTrim($v, $countryCode);
+            }
+            return '+' . $countryCode . $v;
         }
-        if (null === $countryCode) {
-            $countryCode = $this->Config()->default_country_code;
-        }
-        if (0 === strpos((string) $v, '0')) {
-            $v = $this->literalLeftTrim($v, '0');
-        }
-        if ($countryCode) {
-            $v = $this->literalLeftTrim($v, $countryCode);
-        }
-        return '+' . $countryCode . $v;
+        return $v;
     }
 
     protected function removeCountryCode(?int $countryCode = null,)

@@ -166,7 +166,7 @@ class PhoneField extends DBVarchar
         return $v;
     }
 
-    protected function removeCountryCode(?int $countryCode = null,)
+    protected function removeCountryCode(?int $countryCode = null)
     {
         $v = $this->value;
         if (null === $countryCode) {

@@ -173,7 +173,6 @@ class PhoneField extends DBVarchar
             $countryCode = $this->Config()->default_country_code;
         }
         $v = $this->literalLeftTrim($v, '+');
-        $v = $this->literalLeftTrim($v, $countryCode);
-        return $v;
+        return $this->literalLeftTrim($v, $countryCode);
     }
 }

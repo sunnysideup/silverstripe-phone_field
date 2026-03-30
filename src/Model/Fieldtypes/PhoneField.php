@@ -127,7 +127,7 @@ class PhoneField extends DBVarchar
      */
     protected function literalLeftTrim(string $str, string $prefix): string
     {
-        if (substr($str, 0, strlen($prefix)) === $prefix) {
+        if (str_starts_with($str, $prefix)) {
             $str = substr($str, strlen($prefix));
         }
 
@@ -149,20 +149,25 @@ class PhoneField extends DBVarchar
     {
         $v = $this->value;
         if ($v) {
-            if (0 === strpos((string) $v, '+')) {
+            if (str_starts_with((string) $v, '+')) {
                 return $v;
             }
+
             if (null === $countryCode) {
                 $countryCode = $this->Config()->default_country_code;
             }
-            if (0 === strpos((string) $v, '0')) {
+
+            if (str_starts_with((string) $v, '0')) {
                 $v = $this->literalLeftTrim($v, '0');
             }
+
             if ($countryCode) {
                 $v = $this->literalLeftTrim($v, $countryCode);
             }
+
             return '+' . $countryCode . $v;
         }
+
         return $v;
     }
 
@@ -172,6 +177,7 @@ class PhoneField extends DBVarchar
         if (null === $countryCode) {
             $countryCode = $this->Config()->default_country_code;
         }
+
         $v = $this->literalLeftTrim($v, '+');
         return $this->literalLeftTrim($v, $countryCode);
     }

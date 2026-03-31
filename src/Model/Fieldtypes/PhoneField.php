@@ -46,7 +46,7 @@ class PhoneField extends DBVarchar
 
     public function Nice()
     {
-        return self::create_field('Varchar', $this->value);
+        return DBVarchar::create_field('Varchar', $this->value);
     }
 
     /**
@@ -57,7 +57,7 @@ class PhoneField extends DBVarchar
     {
         $phoneNumber = $this->getProperPhoneNumber($countryCode);
 
-        return self::create_field('Varchar', $phoneNumber);
+        return DBVarchar::create_field('Varchar', $phoneNumber);
     }
 
     /**
@@ -69,7 +69,7 @@ class PhoneField extends DBVarchar
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode, true);
 
         /** @var DBVarchar $var */
-        $var = self::create_field('Varchar', $phoneNumber);
+        $var = DBVarchar::create_field('Varchar', $phoneNumber);
 
         return $var;
     }
@@ -86,7 +86,7 @@ class PhoneField extends DBVarchar
         $phoneNumber = 'tel:' . $this->getProperPhoneNumber($countryCode);
 
         /** @var DBVarchar $var */
-        $var = self::create_field('Varchar', $phoneNumber);
+        $var = DBVarchar::create_field('Varchar', $phoneNumber);
 
         return $var;
     }
@@ -114,7 +114,7 @@ class PhoneField extends DBVarchar
         $phoneNumber = 'callto:' . $this->getProperPhoneNumber($countryCode);
 
         /** @var DBVarchar $var */
-        $var = self::create_field('Varchar', $phoneNumber);
+        $var = DBVarchar::create_field('Varchar', $phoneNumber);
 
         return $var;
     }

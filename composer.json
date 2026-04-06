@@ -1,33 +1,33 @@
 {
-    "name": "sunnysideup/phone_field",
-    "type": "silverstripe-vendormodule",
-    "description": "Silverstripe Module that adds a phone field to your database field options, such as Varchar and HTMLText",
-    "keywords": [
-        "Silverstripe-CMS",
-        "CMS",
-        "Silverstripe",
-        "Phone",
-        "DB Field",
-        "Varchar"
-    ],
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Nicolaas Francken",
-            "email": "modules@sunnysideup.co.nz",
-            "role": "lead developer"
-        }
-    ],
-    "require": {
-        "silverstripe/framework": "^6.0"
-    },
-    "extra": [],
-    "autoload": {
-        "psr-4": {
-            "Sunnysideup\\PhoneField\\": "src/"
-        }
-    },
-    "suggests": {
-        "innoweb/silverstripe-international-phone-number-field": "front-end support for phone fields"
+  "name": "sunnysideup/phone_field",
+  "type": "silverstripe-vendormodule",
+  "description": "Silverstripe Module that adds a phone field to your database field options, such as Varchar and HTMLText",
+  "keywords": [
+    "Silverstripe-CMS",
+    "CMS",
+    "Silverstripe",
+    "Phone",
+    "DB Field",
+    "Varchar"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Nicolaas Francken",
+      "email": "modules@sunnysideup.co.nz",
+      "role": "lead developer"
     }
+  ],
+  "require": {
+    "silverstripe/framework": "^6.0"
+  },
+  "extra": [],
+  "autoload": {
+    "psr-4": {
+      "Sunnysideup\\PhoneField\\": "src/"
+    }
+  },
+  "suggests": {
+    "innoweb/silverstripe-international-phone-number-field": "front-end support for phone fields"
+  }
 }

@@ -41,7 +41,7 @@ class PhoneField extends DBVarchar
      */
     public function Link(?int $countryCode = null): DBVarchar
     {
-        return $this->TellLink($countryCode);
+        return $this->TelLink($countryCode);
     }
 
     public function Nice()
